@@ -1,13 +1,33 @@
 import Alert from '../schemas/Alert';
+import AlertValidator from '../validators/AlertValidator';
 
 class AlertController {
   async index(req, res) {
-    res.json({ ok: true });
+    const { userEmail } = req;
+
+    const alerts = await Alert.find({ user_email: userEmail });
+
+    if(!alerts) {
+      return res.status(404).json({
+        message: 'Cannot found alerts for this email',
+        error: true,
+      });
+    };
+
+    return res.json(alerts);
   }
 
   async store(req, res) {
-
     const { searchPhrase, userEmail, notificationSchedule } = req.body;
+
+    const schema = await AlertValidator.validateStore(req.body);
+
+    if(schema.isError) {
+      return res.status(400).json({
+        message: 'Invalid request arguments',
+        error: schema.error,
+      })
+    }
 
     const alert = await Alert.create({
       search_phrase: searchPhrase,
@@ -15,7 +35,73 @@ class AlertController {
       notification_schedule: notificationSchedule,
     });
 
-    res.json(alert);
+    return res.status(201).json(alert);
+  };
+
+  async update(req, res) {
+    const { alertId } = req.params;
+    const { userEmail } = req;
+    const { searchPhrase, notificationSchedule } = req.body;
+
+    const schema = await AlertValidator.validateUpdate(req.body);
+
+    if(schema.isError) {
+      return res.status(400).json({
+        message: 'Invalid request arguments',
+        error: schema.error,
+      });
+    };
+
+    const alert = await Alert.findById(alertId);
+
+    if(!alert) {
+      return res.status(404).json({
+        message: 'Alert not found',
+        error: true,
+      })
+    }
+
+    if(alert.user_email !== userEmail) {
+      return res.status(400).json({
+        message: 'Invalid request arguments',
+        error: 'You cannot update this alert',
+      })
+    };
+
+    const updatedAlert = await Alert.findByIdAndUpdate(alertId,
+      {
+        search_phrase: searchPhrase,
+        notification_schedule: notificationSchedule,
+      },
+      { new: true }
+    );
+
+    return res.json(updatedAlert);
+  };
+
+  async delete (req, res) {
+    const { alertId } = req.params;
+    const { userEmail } = req;
+
+    const alert = await Alert.findById(alertId);
+
+    if(!alert) {
+      return res.status(404).json({
+        message: 'Alert not found',
+        error: true,
+      })
+    }
+
+    if(alert.user_email !== userEmail) {
+      return res.status(400).json({
+        message: 'Invalid request arguments',
+        error: 'You cannot delete this alert',
+      })
+    };
+
+    const deletedAlert = await Alert.findByIdAndRemove(alertId);
+
+    return res.json(deletedAlert);
   };
 }
 

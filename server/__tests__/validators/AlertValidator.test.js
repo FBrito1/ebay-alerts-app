@@ -34,6 +34,7 @@ describe('AlertValidator', () => {
   it('should validate the payload (update)', async () => {
     const payload = {
       searchPhrase: "teste update",
+      notificationSchedule: 30,
     }
 
     const result = await AlertValidator.validateUpdate(payload);
