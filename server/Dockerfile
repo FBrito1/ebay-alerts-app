@@ -6,5 +6,6 @@ WORKDIR /usr/src/app
 
 EXPOSE 3333
 
-# You can change this
 CMD [ "npm", "run", "dev" ]
+
+CMD ["npm", "run", "mailJob"]
