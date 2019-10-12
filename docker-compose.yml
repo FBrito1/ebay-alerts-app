@@ -9,6 +9,7 @@ services:
     volumes:
       - ./client:/usr/src/app
   server:
+    restart: always
     build:
       context: ./server
       dockerfile: Dockerfile
@@ -16,3 +17,10 @@ services:
       - "3333:3333"
     volumes:
       - ./server:/usr/src/app
+    links:
+      - mongo
+
+  mongo:
+    container_name: mongo
+    image: mongo
+    restart: always
