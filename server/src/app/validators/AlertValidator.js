@@ -22,9 +22,8 @@ class AlertValidator {
 
   async validateUpdate (payload) {
     const schema = Yup.object().shape({
-      searchPhrase: Yup.string(),
-      userEmail: Yup.string().email(),
-      notificationSchedule: Yup.number().oneOf([2, 10, 30]),
+      searchPhrase: Yup.string().required(),
+      notificationSchedule: Yup.number().oneOf([2, 10, 30]).required(),
     });
 
     try {
