@@ -29,6 +29,18 @@ class AlertController {
       })
     }
 
+    const alertAlreadyExists = await Alert.findOne({
+      user_email: userEmail,
+      search_phrase: searchPhrase,
+    });
+
+    if(alertAlreadyExists) {
+      return res.status(400).json({
+        message: 'One alert with this search phrase already exists',
+        error: schema.error,
+      })
+    };
+
     const alert = await Alert.create({
       search_phrase: searchPhrase,
       user_email: userEmail,

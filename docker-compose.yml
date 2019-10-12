@@ -1,5 +1,9 @@
 version: "3"
 services:
+  mongo:
+    container_name: mongo
+    image: mongo
+    restart: always
   client:
     build:
       context: ./client
@@ -19,8 +23,3 @@ services:
       - ./server:/usr/src/app
     links:
       - mongo
-
-  mongo:
-    container_name: mongo
-    image: mongo
-    restart: always

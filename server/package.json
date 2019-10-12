@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/server.js",
-    "test": "jest --coverage --forceExit"
+    "test": "jest --maxWorkers=1 --coverage --forceExit"
   },
   "keywords": [],
   "author": "",
