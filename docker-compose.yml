@@ -23,3 +23,11 @@ services:
       - ./server:/usr/src/app
     links:
       - mongo
+    depends_on:
+      - mongo
+      - redis
+  redis:
+    image: redis
+    command: redis-server
+    ports:
+      - "6379:6379"
