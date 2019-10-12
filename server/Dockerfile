@@ -4,6 +4,7 @@ RUN mkdir -p /usr/src/app
 
 WORKDIR /usr/src/app
 
-EXPOSE 3000
+EXPOSE 3333
 
-CMD [ "npm", "start" ]
+# You can change this
+CMD [ "npm", "run", "dev" ]
