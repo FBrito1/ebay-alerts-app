@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import Queue from 'bull';
 import Alert from '../schemas/Alert';
 import AlertValidator from '../validators/AlertValidator';
@@ -54,8 +55,8 @@ class AlertController {
     });
 
     const queueData = {
-      notificationSchedule,
-      alert,
+      email: alert.user_email,
+      id: alert._id,
     };
 
     await sendMail.add(queueData);
@@ -102,6 +103,13 @@ class AlertController {
       { new: true }
     );
 
+    const queueData = {
+      email: alert.user_email,
+      id: alert._id,
+    };
+
+    await sendMail.add(queueData);
+
     return res.json(updatedAlert);
   }
 
@@ -126,6 +134,13 @@ class AlertController {
     }
 
     const deletedAlert = await Alert.findByIdAndRemove(alertId);
+
+    const queueData = {
+      email: null,
+      id: alert._id,
+    };
+
+    await sendMail.add(queueData);
 
     return res.json(deletedAlert);
   }
