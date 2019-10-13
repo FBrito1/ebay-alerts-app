@@ -1,12 +1,12 @@
 /* eslint-disable react/state-in-constructor */
 import React, { Component } from 'react';
-import { FaSpinner, FaArrowRight, FaShoppingCart } from 'react-icons/fa';
+import { FaSpinner, FaSave, FaShoppingCart } from 'react-icons/fa';
 // import { Link } from 'react-router-dom';
 
 import Container from '../../components/Container';
-import { Form, SubmitButton, List, AlertButton } from './styles';
+import { Form, SubmitButton, Select } from './styles';
 
-export default class Home extends Component {
+export default class NewAlert extends Component {
 
   state = {
     loading: false,
@@ -26,22 +26,31 @@ export default class Home extends Component {
           <input
             value=''
             type="text"
-            placeholder="Type your email address to see your alerts"
+            placeholder="Type your email ex: email@email.com"
             onChange={() => {}}
           />
+
+          <input
+            value=''
+            type="text"
+            placeholder="Type tour seach phrase ex: iphone"
+            onChange={() => {}}
+          />
+
+          <Select>
+            <option value="2">2</option>
+            <option value="10">10</option>
+            <option value="30">30</option>
+          </Select>
 
           <SubmitButton loading={loading}>
             {loading ? (
               <FaSpinner color="#FFF" size={14} />
             ) : (
-              <FaArrowRight color="#FFF" size={14} />
+              <FaSave color="#FFF" size={14} />
             )}
           </SubmitButton>
         </Form>
-
-        <AlertButton>
-          Create New Alert
-        </AlertButton>
       </Container>
     );
   }

@@ -3,8 +3,9 @@ import styled, { keyframes, css } from 'styled-components';
 export const Form = styled.form`
   margin-top: 30px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   input {
+    margin-bottom: 10px;
     flex: 1;
     border: 1px solid #eee;
     padding: 10px 15px;
@@ -27,6 +28,7 @@ export const SubmitButton = styled.button.attrs(props => ({
   disabled: props.loading,
 }))`
   background: #141933;
+  height: 50px;
   border: 0;
   padding: 0 15px;
   margin-left: 10px;
@@ -47,18 +49,24 @@ export const SubmitButton = styled.button.attrs(props => ({
     `}
 `;
 
-export const AlertButton = styled.button.attrs(props => ({
-  type: 'submit',
-  disabled: props.loading,
-}))`
-  background: #141933;
+
+export const Select = styled.select`
   width: 100%;
-  height: 50px;
-  margin-top: 20px;
-  display: flex;
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-  border-radius: 4px;
-  color: #fff;
+  height: 35px;
+  background: white;
+  color: gray;
+  padding-left: 5px;
+  font-size: 14px;
+  border: none;
+  margin-left: 10px;
+  margin-bottom: 10px;
+
+  option {
+    color: black;
+    background: white;
+    display: flex;
+    white-space: pre;
+    min-height: 20px;
+    padding: 0px 2px 1px;
+  }
 `;
