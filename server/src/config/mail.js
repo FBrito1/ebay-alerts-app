@@ -7,6 +7,6 @@ export default {
     pass: process.env.MAIL_PASS,
   },
   default: {
-    from: 'Equipe MeetupBrito <noreply@meetup.com>',
+    from: 'Equipe Brito <noreply@brito.com>',
   },
 };
