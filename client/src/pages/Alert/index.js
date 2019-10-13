@@ -1,15 +1,46 @@
 /* eslint-disable react/state-in-constructor */
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { FaTrash, FaShoppingCart, FaPencilAlt, FaSave } from 'react-icons/fa';
+import { FaTrash, FaShoppingCart } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 
+import api from '../../services/api';
 import history from '../../services/history';
 import Container from '../../components/Container';
 import { AlertList } from './styles';
 
 export default function Alert() {
-  const [disabled, setDisabled] = useState(true);
+  const [alerts, setAlerts] = useState([]);
   const userEmail = useSelector(state => state.alert.userEmail);
+
+
+  async function loadAlerts() {
+    const response = await api.get('/alerts', {
+      headers: {
+        email: userEmail,
+      }
+    });
+
+    setAlerts(response.data);
+  };
+
+  useEffect(() => {
+    loadAlerts();
+  }, [alerts]);
+
+  async function handleRemove(id) {
+    try {
+      await api.delete(`/alerts/${id}`, {
+        headers: {
+          email: userEmail,
+        }
+      });
+      toast.success('Alert Deleted');
+      loadAlerts();
+    } catch(e) {
+      toast.error(`Error: ${e.response.data.error}`);
+    };
+  };
 
   return (
     <Container>
@@ -21,7 +52,7 @@ export default function Alert() {
       </h1>
 
       {
-        userEmail ?
+        userEmail && alerts.length > 0 ?
         (
         <>
           <h2>
@@ -30,63 +61,18 @@ export default function Alert() {
 
           <AlertList>
             <p> Your Alerts</p>
-            <li key={String(1)}>
-              <input
-              disabled={disabled}
-              value='xiomi'
-              type="text"
-              placeholder="Type tour seach phrase ex: iphone"
-              onChange={() => {}}
-              />
-              <button type="button">
-                <FaTrash color="#141933" size={14} />
-              </button>
-              <button>
-                {disabled ? (
-                <FaPencilAlt color="#141933" size={14} />
-                ) : (
-                <FaSave color="#141933" size={14} />
-                )}
-              </button>
-            </li>
-            <li key={String(2)}>
-              <input
-              disabled={disabled}
-              value='samsung'
-              type="text"
-              placeholder="Type tour seach phrase ex: iphone"
-              onChange={() => {}}
-              />
-              <button type="button">
-                <FaTrash color="#141933" size={14} />
-              </button>
-              <button>
-                {disabled ? (
-                <FaPencilAlt color="#141933" size={14} />
-                ) : (
-                <FaSave color="#141933" size={14} />
-                )}
-              </button>
-            </li>
-            <li key={String(3)}>
-              <input
-              disabled={disabled}
-              value='iphone'
-              type="text"
-              placeholder="Type tour seach phrase ex: iphone"
-              onChange={() => {}}
-              />
-              <button type="button">
-                <FaTrash color="#141933" size={14} />
-              </button>
-              <button>
-                {disabled ? (
-                <FaPencilAlt color="#141933" size={14} />
-                ) : (
-                <FaSave color="#141933" size={14} />
-                )}
-              </button>
-            </li>
+            { alerts.map(alert => (
+                <li key={alert._id}>
+                <input
+                disabled={true}
+                value={alert.search_phrase}
+                type="text"
+                />
+                <button onClick={() => handleRemove(alert._id)} type="button">
+                  <FaTrash color="#141933" size={14} />
+                </button>
+              </li>
+            )) }
           </AlertList>
         </>
         ) : (
