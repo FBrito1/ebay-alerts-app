@@ -16,6 +16,13 @@ const Container = styled.div`
       margin-right: 10px;
     }
   }
+  h2 {
+    font-size: 15px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
 `;
 
 export default Container;
