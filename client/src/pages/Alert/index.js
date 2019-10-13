@@ -1,5 +1,5 @@
 /* eslint-disable react/state-in-constructor */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { FaTrash, FaShoppingCart, FaPencilAlt, FaSave } from 'react-icons/fa';
 
@@ -8,7 +8,6 @@ import Container from '../../components/Container';
 import { AlertList } from './styles';
 
 export default function Alert() {
-
   const [disabled, setDisabled] = useState(true);
   const userEmail = useSelector(state => state.alert.userEmail);
 
