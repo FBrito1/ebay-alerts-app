@@ -4,7 +4,7 @@ import { FaSpinner, FaArrowRight, FaShoppingCart } from 'react-icons/fa';
 // import { Link } from 'react-router-dom';
 
 import Container from '../../components/Container';
-import { Form, SubmitButton, List, AlertButton } from './styles';
+import { Form, SubmitButton, AlertButton } from './styles';
 
 export default class Home extends Component {
 
