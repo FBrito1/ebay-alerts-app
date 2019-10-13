@@ -24,11 +24,15 @@
     "sucrase": "^3.10.1"
   },
   "dependencies": {
+    "axios": "^0.19.0",
     "bull": "^3.11.0",
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
+    "express-handlebars": "^3.1.0",
     "mongoose": "^5.7.4",
+    "nodemailer": "^6.3.1",
+    "nodemailer-express-handlebars": "^3.1.0",
     "youch": "^2.0.10",
     "yup": "^0.27.0"
   }
