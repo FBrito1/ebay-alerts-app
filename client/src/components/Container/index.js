@@ -23,6 +23,17 @@ const Container = styled.div`
     flex-direction: row;
     align-items: center;
   }
+
+  a {
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    svg {
+      margin-right: 10px;
+    }
+  }
 `;
 
 export default Container;

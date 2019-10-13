@@ -1,8 +1,8 @@
 /* eslint-disable react/state-in-constructor */
 import React, { useState } from 'react';
 import { FaSpinner, FaSave, FaShoppingCart } from 'react-icons/fa';
-// import { Link } from 'react-router-dom';
 
+import history from '../../services/history';
 import Container from '../../components/Container';
 import { Form, SubmitButton, Select } from './styles';
 
@@ -12,8 +12,10 @@ export default function NewAlert() {
   return(
     <Container>
       <h1>
-        <FaShoppingCart />
-        Ebay Alerts
+        <a onClick={() => history.push('/')}>
+          <FaShoppingCart />
+          Ebay Alerts
+        </a>
       </h1>
 
       <Form onSubmit={() => {}}>

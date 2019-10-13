@@ -10,3 +10,10 @@ export function addToAlertSuccess() {
     type: '@alert/ADD_SUCCESS',
   };
 }
+
+export function addEmail(email) {
+  return {
+    type: '@alert/ADD_EMAIL',
+    email,
+  };
+};

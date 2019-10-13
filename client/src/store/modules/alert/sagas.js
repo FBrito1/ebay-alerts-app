@@ -1,7 +1,7 @@
 import { call, select, put, all, takeLatest } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 
-import api from '../../../services/api';
+//import api from '../../../services/api';
 //import history from '../../../services/history';
 
 import { addToAlertSuccess } from './actions';
@@ -11,7 +11,7 @@ function* addAlert({ id }) {
   const data = {};
 
   yield put(addToAlertSuccess(data));
-  history.push('/alerts');
+  // history.push('/alerts');
 }
 
 export default all([
