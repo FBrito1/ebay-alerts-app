@@ -1,6 +1,6 @@
 /* eslint-disable react/state-in-constructor */
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { FaArrowRight, FaShoppingCart } from 'react-icons/fa';
 import history from '../../services/history';
 
