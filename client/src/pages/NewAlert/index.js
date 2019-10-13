@@ -1,57 +1,51 @@
 /* eslint-disable react/state-in-constructor */
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { FaSpinner, FaSave, FaShoppingCart } from 'react-icons/fa';
 // import { Link } from 'react-router-dom';
 
 import Container from '../../components/Container';
 import { Form, SubmitButton, Select } from './styles';
 
-export default class NewAlert extends Component {
+export default function NewAlert() {
+  const [loading, setLoading] = useState(false);
 
-  state = {
-    loading: false,
-  };
+  return(
+    <Container>
+      <h1>
+        <FaShoppingCart />
+        Ebay Alerts
+      </h1>
 
-  render() {
-    const { loading } = this.state;
+      <Form onSubmit={() => {}}>
+        <input
+          value=''
+          type="text"
+          placeholder="Type your email ex: email@email.com"
+          onChange={() => {}}
+        />
 
-    return (
-      <Container>
-        <h1>
-          <FaShoppingCart />
-          Ebay Alerts
-        </h1>
+        <input
+          value=''
+          type="text"
+          placeholder="Type tour seach phrase ex: iphone"
+          onChange={() => {}}
+        />
 
-        <Form onSubmit={() => {}}>
-          <input
-            value=''
-            type="text"
-            placeholder="Type your email ex: email@email.com"
-            onChange={() => {}}
-          />
+        <Select>
+          <option value="2">2</option>
+          <option value="10">10</option>
+          <option value="30">30</option>
+        </Select>
 
-          <input
-            value=''
-            type="text"
-            placeholder="Type tour seach phrase ex: iphone"
-            onChange={() => {}}
-          />
-
-          <Select>
-            <option value="2">2</option>
-            <option value="10">10</option>
-            <option value="30">30</option>
-          </Select>
-
-          <SubmitButton loading={loading}>
-            {loading ? (
-              <FaSpinner color="#FFF" size={14} />
-            ) : (
-              <FaSave color="#FFF" size={14} />
-            )}
-          </SubmitButton>
-        </Form>
-      </Container>
-    );
-  }
+        <SubmitButton loading={loading}>
+          {loading ? (
+            <FaSpinner color="#FFF" size={14} />
+          ) : (
+            <FaSave color="#FFF" size={14} />
+          )}
+        </SubmitButton>
+      </Form>
+    </Container>
+  );
 }
+
