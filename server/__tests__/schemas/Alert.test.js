@@ -3,6 +3,7 @@ import Alert from '../../src/app/schemas/Alert';
 
 
 // https://www.npmjs.com/package/mockingoose
+// https://www.npmjs.com/package/jest-mongoose-mock
 
 describe('Alert Apis Suite Tests', () => {
   // POST
