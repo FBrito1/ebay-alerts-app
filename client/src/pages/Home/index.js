@@ -1,48 +1,41 @@
 /* eslint-disable react/state-in-constructor */
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { FaSpinner, FaArrowRight, FaShoppingCart } from 'react-icons/fa';
 // import { Link } from 'react-router-dom';
 
 import Container from '../../components/Container';
 import { Form, SubmitButton, AlertButton } from './styles';
 
-export default class Home extends Component {
+export default function Home() {
+  const [loading, setLoading] = useState(false);
 
-  state = {
-    loading: false,
-  };
+  return (
+    <Container>
+      <h1>
+        <FaShoppingCart />
+        Ebay Alerts
+      </h1>
 
-  render() {
-    const { loading } = this.state;
+      <Form onSubmit={() => {}}>
+        <input
+          value=''
+          type="text"
+          placeholder="Type your email address to see your alerts"
+          onChange={() => {}}
+        />
 
-    return (
-      <Container>
-        <h1>
-          <FaShoppingCart />
-          Ebay Alerts
-        </h1>
+        <SubmitButton loading={loading}>
+          {loading ? (
+            <FaSpinner color="#FFF" size={14} />
+          ) : (
+            <FaArrowRight color="#FFF" size={14} />
+          )}
+        </SubmitButton>
+      </Form>
 
-        <Form onSubmit={() => {}}>
-          <input
-            value=''
-            type="text"
-            placeholder="Type your email address to see your alerts"
-            onChange={() => {}}
-          />
-
-          <SubmitButton loading={loading}>
-            {loading ? (
-              <FaSpinner color="#FFF" size={14} />
-            ) : (
-              <FaArrowRight color="#FFF" size={14} />
-            )}
-          </SubmitButton>
-        </Form>
-
-        <AlertButton>
-          Create New Alert
-        </AlertButton>
-      </Container>
-    );
-  }
-}
+      <AlertButton>
+        Create New Alert
+      </AlertButton>
+    </Container>
+  );
+};
